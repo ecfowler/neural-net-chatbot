@@ -6,6 +6,7 @@
 #    May 27, 2020 12:04:27 PM BST  platform: Windows NT
 
 import sys
+import entryReader
 
 try:
     import Tkinter as tk
@@ -47,6 +48,19 @@ def destroy_Form():
     w = None
 
 class Form:
+    def send(self):
+        msg = self.TextBox.get().strip()
+        self.TextBox.delete(0, tk.END)
+
+        if msg != '':
+            self.ChatLog.config(state=tk.NORMAL)
+            self.ChatLog.insert(tk.END, "You: " + msg + '\n\n')
+            self.ChatLog.config(foreground="#442265", font=("Verdana", 12 ))
+
+            res = "Generic Response"
+            self.ChatLog.insert(tk.END, "Bot: " + res + '\n\n')
+
+
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
            top is the toplevel containing window.'''
@@ -80,7 +94,7 @@ class Form:
         self.TextBox.configure(takefocus="")
         self.TextBox.configure(cursor="ibeam")
 
-        self.EnterBtn = ttk.Button(top)
+        self.EnterBtn = ttk.Button(top, command=self.send)
         self.EnterBtn.place(relx=0.717, rely=0.733, height=30, width=98)
         self.EnterBtn.configure(takefocus="")
         self.EnterBtn.configure(text='''Enter''')
@@ -100,7 +114,10 @@ class Form:
         self.ChatLog.configure(selectforeground="black")
         self.ChatLog.configure(wrap="none")
 
-        self.MistakeBtn = tk.Button(top)
+        def mistakeCallback():
+            print('Mistake!')
+
+        self.MistakeBtn = tk.Button(top, command=mistakeCallback)
         self.MistakeBtn.place(relx=0.033, rely=0.822, height=33, width=150)
         self.MistakeBtn.configure(activebackground="#ececec")
         self.MistakeBtn.configure(activeforeground="#000000")

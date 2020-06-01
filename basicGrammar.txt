@@ -1,0 +1,23 @@
+S > NP VP
+
+NP > N
+N > ProperNoun
+N > Pronoun
+
+NP > det NP
+NP > possNP NP
+NP > AP NP
+NP > NP PP
+
+possNP > possN
+possNP > det possNP
+possNP > AP possNP
+possNP > possNP PP
+
+PP > P NP
+PP > PP PP
+
+AP > A
+AP > AP AP
+
+VP > V
